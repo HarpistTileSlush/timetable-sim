@@ -25,10 +25,10 @@ and wasteful off-peak.
 6. Exports the recommended timetable as GTFS.
 
 ## Results
-[Corridor studied, data used, headline numbers, and the three charts.]
+WIP
 
 ## Validation
-[Journeys ridden (dates and times), calibration output, where the model was wrong and why.]
+
 
 ## Data: real vs assumed
 | Input | Source | Real or assumed |
@@ -43,11 +43,9 @@ and wasteful off-peak.
 - Knock-on delays between trips not simulated; blocks use scheduled times.
 - Constant charging rate; no taper curve or charger contention.
 - Simplified drivers' hours (single 45-min break only).
-- [Anything else you found.]
 
 ## How I used AI
-[Be specific: what the AI produced, what you reviewed, tested and changed, what
-you built yourself, and at least one case where AI output was wrong and how you caught it.]
+- AI built up the initial draft of the project, to get it off the ground. I used this as a learning opportunity to sift through the code and learn what was done and why. From here, I plan to iterate on the system, use my background in data analytics to see where the simulation is lacking and improving it.
 
 ## Running it
 pip install -r requirements.txt
