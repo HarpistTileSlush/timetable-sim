@@ -1,0 +1,6 @@
+journey_id,date,day_type,stop_id,arrival_time,departure_time
+J1,2026-10-06,weekday,A,,07:00
+J1,2026-10-06,weekday,B,07:21,07:23
+J1,2026-10-06,weekday,C,07:49,07:50
+J1,2026-10-06,weekday,E,08:40,08:42
+J1,2026-10-06,weekday,F,09:03,

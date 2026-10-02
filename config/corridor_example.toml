@@ -1,0 +1,160 @@
+# ILLUSTRATIVE corridor. Stop names, coordinates, distances and all parameters
+# are placeholders, NOT Ember data. Replace with real values: NaPTAN for stops,
+# ridden journeys / Routes API estimates for running times.
+
+[route]
+id = "X1"
+short_name = "X1"
+long_name = "City A - City F (illustrative)"
+agency_name = "Portfolio demo"
+agency_url = "https://example.org"
+timezone = "Europe/London"
+
+[simulation]
+n_runs = 4000
+seed = 42
+segment_correlation = 0.5   # shared "bad traffic day" effect across segments (0-1)
+season = "autumn"
+
+[season_multiplier]          # scales optional-stop demand
+winter = 0.85
+spring = 1.0
+summer = 1.15
+autumn = 1.0
+
+[punctuality]
+early_limit_min = 1.0        # up to 1 min early ...
+late_limit_min = 5.98        # ... to 5 min 59 s late (check current TC guidance)
+target_percentile = 0.85
+
+[timetable]
+first_departure = "06:00"
+last_departure = "21:00"
+headway_min = 60
+day_type = "weekday"         # weekday | weekend
+
+[operations]
+min_layover_min = 10
+battery_usable_kwh = 400.0   # ASSUMPTION - replace with a published spec
+consumption_kwh_per_km = 1.1 # ASSUMPTION
+winter_factor = 1.25         # ASSUMPTION - extra energy in cold weather
+charge_power_kw = 600.0      # best-case peak rate
+charge_efficiency = 0.6      # ASSUMPTION - average vs peak, incl. taper and losses
+reserve_fraction = 0.15
+max_driving_min = 270        # 4.5 h
+min_break_min = 45
+coach_speed_cap_kmh = 100    # speed limiter; used when converting car times
+
+[bands]                      # [start_min, end_min) after midnight; must be contiguous
+early = [0, 420]
+am_peak = [420, 570]
+interpeak = [570, 960]
+pm_peak = [960, 1110]
+evening = [1110, 1440]
+
+[synthetic]
+obs_per_cell = 40
+
+[synthetic.sigma]            # log-scale spread of running times by band
+early = 0.04
+am_peak = 0.12
+interpeak = 0.06
+pm_peak = 0.14
+evening = 0.05
+
+[synthetic.congestion.weekday]   # multiplier on free-flow time for a fully urban segment
+early = 1.00
+am_peak = 1.35
+interpeak = 1.10
+pm_peak = 1.40
+evening = 1.02
+
+[synthetic.congestion.weekend]
+early = 1.00
+am_peak = 1.05
+interpeak = 1.15
+pm_peak = 1.10
+evening = 1.02
+
+[[stops]]
+id = "A"
+name = "City A centre"
+lat = 0.0
+lon = 0.0
+timing_point = true
+charger = true
+
+[[stops]]
+id = "B"
+name = "City A park and ride"
+timing_point = true
+dwell_median_s = 90
+dwell_sigma = 0.4
+
+[[stops]]
+id = "C"
+name = "Town C (demand-responsive)"
+optional = true
+timing_point = false
+serve_prob = { weekday = 0.55, weekend = 0.40 }
+detour_s = 240
+dwell_median_s = 45
+dwell_sigma = 0.5
+
+[[stops]]
+id = "D"
+name = "Town D (demand-responsive)"
+optional = true
+timing_point = false
+serve_prob = { weekday = 0.35, weekend = 0.45 }
+detour_s = 180
+dwell_median_s = 45
+dwell_sigma = 0.5
+
+[[stops]]
+id = "E"
+name = "City F park and ride"
+timing_point = true
+dwell_median_s = 90
+dwell_sigma = 0.4
+
+[[stops]]
+id = "F"
+name = "City F centre"
+timing_point = true
+charger = true
+
+[[segments]]
+from = "A"
+to = "B"
+distance_km = 9.0
+freeflow_min = 18.0
+congestion_sensitivity = 1.0
+
+[[segments]]
+from = "B"
+to = "C"
+distance_km = 32.0
+freeflow_min = 22.0
+congestion_sensitivity = 0.3
+
+[[segments]]
+from = "C"
+to = "D"
+distance_km = 28.0
+freeflow_min = 19.0
+congestion_sensitivity = 0.25
+
+[[segments]]
+from = "D"
+to = "E"
+distance_km = 27.0
+freeflow_min = 19.0
+congestion_sensitivity = 0.4
+
+[[segments]]
+from = "E"
+to = "F"
+distance_km = 8.0
+freeflow_min = 17.0
+congestion_sensitivity = 1.0
